@@ -127,7 +127,7 @@ abstract class AbstractTemporalCollection implements TemporalCollection
         return count($this->collection);
     }
 
-    protected function getCollectionKey($date)
+    protected function getCollectionKey(DateTime $date = null)
     {
         if (null === $date) {
             return '';
