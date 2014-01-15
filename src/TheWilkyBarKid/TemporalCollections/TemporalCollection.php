@@ -35,4 +35,11 @@ interface TemporalCollection extends ArrayAccess, Countable
      * @return mixed
      */
     public function get($when = null);
+
+    /**
+     * Get all values.
+     *
+     * @return TemporalValue[]
+     */
+    public function all();
 }

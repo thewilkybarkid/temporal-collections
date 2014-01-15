@@ -102,6 +102,33 @@ abstract class AbstractTemporalCollection implements TemporalCollection
         return current($this->collection);
     }
 
+    public function all()
+    {
+        $values = array();
+
+        $previousFrom = null;
+
+        foreach ($this->collection as $key => $value) {
+            if (null === $previousFrom) {
+                $to = null;
+            } else {
+                $to = new DateTime($previousFrom . ' -1 second', new DateTimeZone('UTC'));
+            }
+
+            if ('' === $key) {
+                $from = null;
+            } else {
+                $from = new DateTime($key, new DateTimeZone('UTC'));
+            }
+
+            $values[] = new TemporalValue($value, $from, $to);
+
+            $previousFrom = $key;
+        }
+
+        return $values;
+    }
+
     public function offsetSet($offset, $value)
     {
         $this->set($value, $offset);

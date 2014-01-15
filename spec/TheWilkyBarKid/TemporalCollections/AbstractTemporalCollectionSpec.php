@@ -2,8 +2,10 @@
 
 namespace spec\TheWilkyBarKid\TemporalCollections;
 
+use DateTime;
 use DateTimeImmutable;
 use PhpSpec\ObjectBehavior;
+use TheWilkyBarKid\TemporalCollections\TemporalValue;
 
 /**
  * Abstract temporal collection spec.
@@ -63,6 +65,20 @@ abstract class AbstractTemporalCollectionSpec extends ObjectBehavior
             new DateTimeImmutable('2000-01-01'),
             new DateTimeImmutable('1999-12-31')
         );
+    }
+
+    public function it_should_return_all_values()
+    {
+        $this->set('Bar', new DateTimeImmutable('1950-01-01'));
+        $this->set('Foo', new DateTimeImmutable('2000-01-01'));
+
+        $expected = array(
+            new TemporalValue('Foo', new DateTime('2000-01-01 00:00:00'), null),
+            new TemporalValue('Bar', new DateTime('1950-01-01 00:00:00'), new DateTime('1999-12-31 23:59:59')),
+            new TemporalValue(null, null, new DateTime('1949-12-31 23:59:59')),
+        );
+
+        $this->all()->shouldBeLike($expected);
     }
 
     public function it_should_use_array_access()
