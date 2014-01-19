@@ -3,6 +3,7 @@
 namespace TheWilkyBarKid\TemporalCollections;
 
 use DateTime;
+use InvalidArgumentException;
 
 /**
  * Temporal value.
@@ -32,9 +33,15 @@ class TemporalValue
      * @param mixed         $value
      * @param DateTime|null $effectiveFrom
      * @param DateTime|null $effectiveTo
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct($value, DateTime $effectiveFrom = null, DateTime $effectiveTo = null)
     {
+        if (null !== $effectiveFrom && null !== $effectiveTo && $effectiveTo < $effectiveFrom) {
+            throw new InvalidArgumentException('To date must on or after the from date');
+        }
+
         $this->value = $value;
         $this->effectiveFrom = $effectiveFrom;
         $this->effectiveTo = $effectiveTo;

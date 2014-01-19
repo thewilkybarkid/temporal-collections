@@ -56,4 +56,23 @@ class TemporalValueSpec extends ObjectBehavior
 
         $this->getEffectiveTo()->shouldBeLike($to);
     }
+
+    public function it_may_have_the_same_from_and_to_date()
+    {
+        $from = new DateTime('2000-01-01 00:00:00');
+        $to = new DateTime('2000-01-01 00:00:00');
+
+        $this->beConstructedWith($this->value, $from, $to);
+
+        $this->getEffectiveFrom()->shouldBeLike($from);
+        $this->getEffectiveTo()->shouldBeLike($to);
+    }
+
+    public function it_rejects_to_dates_before_the_from_date()
+    {
+        $from = new DateTime('2000-01-01 00:00:01');
+        $to = new DateTime('2000-01-01 00:00:00');
+
+        $this->shouldThrow('InvalidArgumentException')->during('__construct', array($this->value, $from, $to));
+    }
 }
