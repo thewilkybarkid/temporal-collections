@@ -19,18 +19,18 @@ interface TemporalCollection extends ArrayAccess, Countable
     /**
      * Set value for a date/time.
      *
-     * @param mixed                      $value
-     * @param DateTime|DateTimeInterface $effectiveFrom
-     * @param DateTime|DateTimeInterface $effectiveTo
+     * @param mixed                                  $value
+     * @param DateTime|DateTimeInterface|string|null $effectiveFrom
+     * @param DateTime|DateTimeInterface|string|null $effectiveTo
      *
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException If a date cannot be recognised.
      */
     public function set($value, $effectiveFrom = null, $effectiveTo = null);
 
     /**
      * Get value for a date/time.
      *
-     * @param DateTime|DateTimeInterface|null $when
+     * @param DateTime|DateTimeInterface|string|null $when
      *
      * @return mixed
      */
