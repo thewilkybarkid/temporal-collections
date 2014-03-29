@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "": "src/"
+            "TheWilkyBarKid\\TemporalCollections\\": "src/"
         }
     },
     "require": {
