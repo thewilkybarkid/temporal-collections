@@ -2,6 +2,10 @@
     "name": "thewilkybarkid/temporal-collections",
     "description": "Temporal collections library",
     "license": "MIT",
+    "homepage": "https://github.com/thewilkybarkid/temporal-collections",
+    "support": {
+        "issues": "https://github.com/thewilkybarkid/temporal-collections/issues"
+    },
     "authors": [
         {
             "name": "Chris Wilkinson",
