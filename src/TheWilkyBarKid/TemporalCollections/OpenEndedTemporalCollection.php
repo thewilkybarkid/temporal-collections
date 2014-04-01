@@ -18,4 +18,13 @@ namespace TheWilkyBarKid\TemporalCollections;
  */
 class OpenEndedTemporalCollection extends AbstractTemporalCollection
 {
+    /**
+     * Constructor.
+     *
+     * @param mixed $initialValue
+     */
+    public function __construct($initialValue = null)
+    {
+        $this->set($initialValue);
+    }
 }
