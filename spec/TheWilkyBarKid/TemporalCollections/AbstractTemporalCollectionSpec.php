@@ -11,6 +11,7 @@
 
 namespace spec\TheWilkyBarKid\TemporalCollections;
 
+use ArrayIterator;
 use DateTime;
 use DateTimeImmutable;
 use PhpSpec\ObjectBehavior;
@@ -28,6 +29,7 @@ abstract class AbstractTemporalCollectionSpec extends ObjectBehavior
         $this->shouldBeAnInstanceOf('TheWilkyBarKid\TemporalCollections\TemporalCollection');
         $this->shouldBeAnInstanceOf('ArrayAccess');
         $this->shouldBeAnInstanceOf('Countable');
+        $this->shouldBeAnInstanceOf('IteratorAggregate');
     }
 
     public function it_should_be_addable()
@@ -136,5 +138,21 @@ abstract class AbstractTemporalCollectionSpec extends ObjectBehavior
         $this->count()->shouldReturn(3);
         $this->set('Foo', new DateTimeImmutable('1925-01-01'));
         $this->count()->shouldReturn(1);
+    }
+
+    public function it_should_be_traversable()
+    {
+        $this->set('Foo', null);
+        $this->set('Bar', new DateTimeImmutable('1950-01-01'));
+        $this->set('Bar', new DateTimeImmutable('2000-01-01'));
+        $this->set('Baz', new DateTimeImmutable('1925-01-01'), new DateTimeImmutable('1975-01-01'));
+
+        $iterator = new ArrayIterator(array(
+            new TemporalValue('Bar', new DateTime('1975-01-01 00:00:01')),
+            new TemporalValue('Baz', new DateTime('1925-01-01 00:00:00'), new DateTime('1975-01-01 00:00:00')),
+            new TemporalValue('Foo', null, new DateTime('1924-12-31 23:59:59')),
+        ));
+
+        $this->getIterator()->shouldBeLike($iterator);
     }
 }

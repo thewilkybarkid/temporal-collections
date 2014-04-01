@@ -11,6 +11,7 @@
 
 namespace TheWilkyBarKid\TemporalCollections;
 
+use ArrayIterator;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
@@ -136,6 +137,11 @@ abstract class AbstractTemporalCollection implements TemporalCollection
         }
 
         return $values;
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->all());
     }
 
     public function offsetSet($offset, $value)

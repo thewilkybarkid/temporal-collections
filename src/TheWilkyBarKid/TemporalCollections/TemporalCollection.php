@@ -16,6 +16,7 @@ use Countable;
 use DateTime;
 use DateTimeInterface;
 use InvalidArgumentException;
+use IteratorAggregate;
 
 /**
  * A temporal collection is a simple way to implement a temporal property, that
@@ -23,7 +24,7 @@ use InvalidArgumentException;
  *
  * @author Chris Wilkinson <chriswilkinson84@gmail.com>
  */
-interface TemporalCollection extends ArrayAccess, Countable
+interface TemporalCollection extends ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * Set value for a date/time.
