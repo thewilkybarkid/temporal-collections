@@ -19,4 +19,4 @@ before_install:
 install:
   - composer install --dev --prefer-source --no-interaction
 
-script: ./bin/phpspec run
+script: ./bin/phpspec run --format=pretty
